@@ -1,5 +1,6 @@
 package org.example.restcontroller;
 
+import org.example.dto.SomeData;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,5 +20,10 @@ public class BindExample {
     @GetMapping("/{someNumber}")
     public String passNumberWithPath(@PathVariable int someNumber) {
         return "Your number " + someNumber;
+    }
+
+    @PostMapping("/someData")
+    public String passObj(@RequestBody SomeData someData) {
+        return "Your data " + someData;
     }
 }
