@@ -15,4 +15,9 @@ public class BindExample {
     public String printNameOrDefault(@RequestParam(defaultValue = "set name please :D") String name) {
         return "Hello " + name;
     }
+
+    @GetMapping("/{someNumber}")
+    public String passNumberWithPath(@PathVariable int someNumber) {
+        return "Your number " + someNumber;
+    }
 }
