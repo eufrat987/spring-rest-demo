@@ -1,7 +1,9 @@
 package org.example.restcontroller;
 
 import org.example.dto.SomeData;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/bind")
@@ -23,7 +25,15 @@ public class BindExample {
     }
 
     @PostMapping("/someData")
+    @ResponseStatus(HttpStatus.OK)
     public String passObj(@RequestBody SomeData someData) {
+        if (someData.name() == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.UNPROCESSABLE_ENTITY,
+                    "Provide name please",
+                    new IllegalArgumentException()
+            );
+        }
         return "Your data " + someData;
     }
 }
